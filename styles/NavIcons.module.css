@@ -1,0 +1,9 @@
+.navIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.span {
+  margin-left: 2px;
+}
