@@ -1,18 +1,20 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductsContext from "../context/products-context";
 import CardItem from "../components/reusable/CardItem";
-import { API_URL } from "../config/index";
+import http from "../api/http";
+import Spinner from "../components/reusable/Spiner";
 
 export default function Home({ data }) {
-  const { products, updateProducts } = useContext(ProductsContext);
+  const [loading, setLoading] = useState(false);
+  const { updateProducts } = useContext(ProductsContext);
 
   useEffect(() => {
+    setLoading(true);
     updateProducts(data);
+    setLoading(false);
   }, []);
 
-  if (products === undefined) {
-    <p>Loading....</p>;
-  }
+  if (loading) return <Spinner />;
 
   return (
     <div className="container">
@@ -28,12 +30,11 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/items/`);
-  const data = await res.json();
+  const { data } = await http.get("/items");
 
   if (!data) return { notFound: true };
   return {
     props: { data },
-    revalidate: 1,
+    revalidate: 6000,
   };
 }

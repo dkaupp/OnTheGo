@@ -10,7 +10,7 @@ function Rating({ rating }) {
         ) : value >= 0.5 ? (
           <RatingIcons type="half" />
         ) : (
-          <RatingIcons />
+          <RatingIcons type="non" />
         )}
       </span>
       <span className={styles.ratingSpan}>
@@ -19,7 +19,7 @@ function Rating({ rating }) {
         ) : value >= 1.5 ? (
           <RatingIcons type="half" />
         ) : (
-          <RatingIcons />
+          <RatingIcons type="none" />
         )}
       </span>
       <span className={styles.ratingSpan}>
@@ -28,7 +28,7 @@ function Rating({ rating }) {
         ) : rating >= 2.5 ? (
           <RatingIcons type="half" />
         ) : (
-          <RatingIcons />
+          <RatingIcons type="none" />
         )}
       </span>
       <span className={styles.ratingSpan}>
@@ -37,16 +37,16 @@ function Rating({ rating }) {
         ) : rating >= 3.5 ? (
           <RatingIcons type="half" />
         ) : (
-          <RatingIcons />
+          <RatingIcons type="none" />
         )}
       </span>
-      <span mr-1>
+      <span className={styles.ratingSpan}>
         {rating >= 5 ? (
           <RatingIcons type="full" />
         ) : rating >= 4.5 ? (
           <RatingIcons type="half" />
         ) : (
-          <RatingIcons />
+          <RatingIcons type="none" />
         )}
       </span>
     </div>

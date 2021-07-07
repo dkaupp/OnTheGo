@@ -1,0 +1,25 @@
+.para {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.cardContainer {
+  margin-top: 2rem;
+  border: 2px solid black;
+  border-radius: 6px;
+  margin-left: 4rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.listDiv {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+}

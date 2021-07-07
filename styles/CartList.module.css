@@ -1,0 +1,25 @@
+.spanName {
+  font-weight: bold;
+  display: block;
+}
+
+.spanQuantity {
+  font-weight: bold;
+  margin-left: auto;
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: 1.3rem;
+}
+
+.spanPrice {
+  text-align: end;
+  font-weight: bold;
+  margin-right: 1.5rem;
+  width: 5rem;
+  font-size: 1.3rem;
+}
+
+.qIcons {
+  height: 2.5rem;
+  width: 3rem;
+}

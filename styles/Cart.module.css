@@ -1,0 +1,5 @@
+.cartButton :first-child {
+  margin-top: 2rem;
+  border: 2px solid black;
+  font-weight: 700;
+}

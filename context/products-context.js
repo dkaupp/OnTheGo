@@ -2,8 +2,8 @@ import { createContext, useState } from "react";
 
 const ProductsContext = createContext(null);
 
-export function ProductsContextProvider({ children, initialProduct }) {
-  const [products, setProducts] = useState(initialProduct);
+export function ProductsContextProvider({ children, initialProducts }) {
+  const [products, setProducts] = useState(initialProducts);
   function updateProducts(data) {
     setProducts(data);
   }
