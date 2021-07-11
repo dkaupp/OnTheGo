@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import styles from "../../styles/TotalTable.module.css";
 import CartContext from "../../context/cart-context";
+import Link from "next/link";
 
-const TotalTable = ({ totalAmount, totalQuantity, updateCart }) => {
+const TotalTable = ({ totalAmount, totalQuantity, updateCart, user }) => {
   const { clearCart } = useContext(CartContext);
 
   const handleClear = async () => {
@@ -26,10 +27,16 @@ const TotalTable = ({ totalAmount, totalQuantity, updateCart }) => {
           <li className="list-group-item">
             <div className={styles.buttonsContainer}>
               <button className="btn btn-secondary" onClick={handleClear}>
-                {" "}
                 CLEAR CART
               </button>
-              <button className="btn btn-dark">CHECK OUT</button>
+              <Link
+                href={{
+                  pathname: user ? "/checkout/shipping" : "/singin",
+                  query: { checkout: "activated" },
+                }}
+              >
+                <button className="btn btn-dark">CHECK OUT</button>
+              </Link>
             </div>
           </li>
         </ul>

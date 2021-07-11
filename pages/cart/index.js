@@ -2,13 +2,15 @@ import { useEffect, useContext, useState } from "react";
 import { withRouter } from "next/router";
 import Link from "next/link";
 import CartContext from "../../context/cart-context";
+import AuthContext from "../../context/auth-context";
 import CartListItem from "../../components/reusable/CartListItem";
-import Spiner from "../../components/reusable/Spiner";
+import Spiner from "../../components/reusable/Spinner";
 import TotalTable from "../../components/reusable/TotalTable";
 import styles from "../../styles/Cart.module.css";
 
 const Cart = ({ router }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
   const { populateCart, getCartLocal } = useContext(CartContext);
 
   const [cart, setCart] = useState([]);
@@ -26,7 +28,6 @@ const Cart = ({ router }) => {
   }
 
   useEffect(() => {
-    setLoading(true);
     populateComponent(id, qty);
     setLoading(false);
   }, [id, qty]);
@@ -67,6 +68,7 @@ const Cart = ({ router }) => {
             totalAmount={totalAmount}
             totalQuantity={totalQuantity}
             updateCart={updateCart}
+            user={user}
           />
         </div>
       </div>

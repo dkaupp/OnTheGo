@@ -7,6 +7,7 @@ import Rating from "../../components/reusable/Rating";
 import QuantyIcon from "../../components/icons/QuantityIcons";
 import styles from "../../styles/Product.module.css";
 import CartContext from "../../context/cart-context";
+import Spinner from "../../components/reusable/Spinner";
 
 function Product({
   product: {
@@ -20,6 +21,7 @@ function Product({
     _id,
   },
 }) {
+  const [loading, setLoading] = useState(true);
   const { getCartLocal } = useContext(CartContext);
   const [qty, setQty] = useState(initialQuantity);
 
@@ -35,6 +37,7 @@ function Product({
 
   useEffect(() => {
     getQuantity();
+    setLoading(false);
   }, []);
 
   const handleQtyChange = (operator) => {
@@ -45,12 +48,13 @@ function Product({
       return setQty((q) => q + 1);
     }
   };
+  if (loading) return <Spinner />;
 
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="col-lg-6 col-md-12">
-          <Image src={image.url} height={600} width={800} alt={name} />
+          <Image src={image.url} height={600} width={800} alt={description} />
         </div>
         <div className="col-lg-4 col-md-6">
           <h2>{name.toUpperCase()}</h2>
@@ -59,7 +63,7 @@ function Product({
           <hr />
           <p className={styles.para}>Price : ${price}</p>
           <hr />
-          <Rating rating={4.5} />
+          <Rating rating={rating ? rating : "4.0"} />
           <hr />
           <div>
             <div className="d-flex">

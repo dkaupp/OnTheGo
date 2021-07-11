@@ -1,4 +1,5 @@
 import jwtDecode from "jwt-decode";
+import http from "../api/http";
 
 const token = "authToken";
 
@@ -12,8 +13,12 @@ const getAuthToken = () => {
 
 const getUser = () => {
   const authToken = localStorage.getItem(token);
-
-  return authToken ? jwtDecode(authToken) : null;
+  if (authToken) {
+    http.setJWT(authToken);
+    return jwtDecode(authToken);
+  } else {
+    return null;
+  }
 };
 
 const removeAuthToken = () => {

@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { validate, validateProperty } from "../utils/validation";
 
-const useForm = ({ initialData, onSubmit, schema }) => {
+const useFormShipping = ({ initialData, onSubmit, schema }) => {
   const [data, setData] = useState(initialData || {});
   const [errors, setErrors] = useState(null);
+
+  useEffect(() => {
+    setData(initialData);
+  }, [initialData]);
 
   const handleChange = ({ target: { name, value } }) => {
     const error = { ...errors };
@@ -34,4 +38,4 @@ const useForm = ({ initialData, onSubmit, schema }) => {
   };
 };
 
-export default useForm;
+export default useFormShipping;

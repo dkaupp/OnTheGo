@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import AuthContext from "../../context/auth-context";
 import Link from "next/link";
-import styles from "../../styles/Header.module.css";
 import NavIcons from "../icons/NavIcons";
 
 function Header() {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   return (
     <header>
@@ -64,12 +63,12 @@ function Header() {
                       />
                     </svg>
                   }
-                  text={user ? user.name : "Sing In"}
-                  link="/singin"
+                  text={user ? "Account " : "Sing In"}
+                  link={user ? "/account" : "/singin"}
                 />
               </li>
               {user && (
-                <li className="nav-item">
+                <li className="nav-item" onClick={() => logOut()}>
                   <NavIcons
                     icon={
                       <svg
@@ -84,7 +83,7 @@ function Header() {
                       </svg>
                     }
                     text="Log Out"
-                    link="/logout"
+                    link="/"
                   />
                 </li>
               )}
