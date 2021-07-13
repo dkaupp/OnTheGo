@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Checkout = ({ step1, step2, step3, step4, page }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light ">
+    <nav className="navbar navbar-expand-lg navbar-light justify-content-center">
       <ul className="navbar-nav">
         <li className="nav-item">
           {step1 ? (
@@ -57,9 +57,12 @@ const Checkout = ({ step1, step2, step3, step4, page }) => {
         </li>
         <li className="nav-item">
           {step4 ? (
-            <Link href="/order">
-              <a className="nav-link">Place Order</a>
-            </Link>
+            <a
+              className={`nav-link ${page === "order" && "active"}`}
+              aria-current="page"
+            >
+              Place Order
+            </a>
           ) : (
             <a className="nav-link disabled" disabled>
               Place Order

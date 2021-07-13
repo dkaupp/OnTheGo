@@ -1,0 +1,6 @@
+.orderButton {
+}
+
+.orderButton:hover {
+  opacity: 0.5;
+}

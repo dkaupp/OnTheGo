@@ -22,7 +22,11 @@ const getUser = () => {
 };
 
 const removeAuthToken = () => {
-  localStorage.removeItem(token);
+  // localStorage.removeItem(token);
+  // localStorage.removeItem("customer");
+  // localStorage.removeItem("cartToken");
+  // localStorage.removeItem("orderToken");
+  localStorage.clear();
 };
 
 export default {

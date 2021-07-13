@@ -18,6 +18,16 @@
   width: 5rem;
   font-size: 1.3rem;
 }
+.spanFinal {
+  text-align: end;
+  font-weight: bold;
+  margin-right: 1.5rem;
+  width: 5rem;
+  font-size: 1.1rem;
+}
+.spanFinal:last-child {
+  margin-right: 0;
+}
 
 .qIcons {
   height: 2.5rem;

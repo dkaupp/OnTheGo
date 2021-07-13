@@ -39,7 +39,21 @@ const Cart = ({ router }) => {
     setCart(storageCart);
   };
 
-  if (!cart) return <div>There are no items in the cart</div>;
+  if (!cart)
+    return (
+      <div className="container">
+        <div className="row no-gutters mt-4 text-center">
+          <h3>There are no items in the cart</h3>
+          <Link href={"/"}>
+            <div className={styles.cartButton}>
+              <button className="btn btn-outline-dark">
+                CONTINUE SHOPPING
+              </button>
+            </div>
+          </Link>
+        </div>
+      </div>
+    );
 
   const { cart: items, totalAmount, totalQuantity } = cart;
 

@@ -9,6 +9,11 @@ export function CartContextProvider({ children }) {
 
   const tokenKey = "cartToken";
 
+  useEffect(() => {
+    const storageCart = getCartLocal();
+    setCart(storageCart);
+  }, []);
+
   const addItemToCart = async (id, qty = 1) => {
     const token = localStorage.getItem(tokenKey);
 

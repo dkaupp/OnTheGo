@@ -17,11 +17,17 @@ export const CustomerContextProvider = ({ children }) => {
     setCustomer(customer);
   };
 
+  const addPaymentMethod = (paymentMethod) => {
+    customer.paymentMethod = paymentMethod;
+    storeCustomerData(customer);
+  };
+
   const context = {
     customer,
     setCustomer,
     storeCustomerData,
     loading,
+    addPaymentMethod,
   };
   return (
     <CustomerContext.Provider value={context}>
