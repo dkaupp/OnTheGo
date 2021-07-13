@@ -30,6 +30,12 @@ export const AuthContextProvider = ({ children }) => {
     return { errors: null };
   };
 
+  const register = async (token) => {
+    const user = jwtDecode(token);
+    setUser(user);
+    authStorage.storeAuthToken(token);
+  };
+
   const logOut = () => {
     setUser(null);
     authStorage.removeAuthToken();
@@ -43,6 +49,7 @@ export const AuthContextProvider = ({ children }) => {
         logIn,
         logOut,
         loading,
+        register,
       }}
     >
       {children}

@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import useAuth from "../../auth/useAuth";
 import useForm from "../../hooks/useForm";
 import registerApi from "../../api/registerApi";
 import Joi from "joi-browser";
@@ -25,13 +24,12 @@ const schema = {
 
 const Register = () => {
   const [loading, setLoading] = useState(true);
-  const { user } = useContext(AuthContext);
+  const { user, register } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(false);
   }, []);
 
-  const { logIn } = useAuth();
   const router = useRouter();
 
   const { data, errors, handleChange, handleSubmit, setErrors } = useForm({
@@ -46,8 +44,8 @@ const Register = () => {
       if (response.error) {
         return setErrors({ email: response.error, password: response.error });
       }
-      logIn(response);
-      router.replace("/");
+      register(response);
+      router.push("/");
     },
     schema,
   });

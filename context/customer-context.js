@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import getCustomer from "../api/getCutomer";
 
 const CustomerContext = createContext();
 
@@ -8,6 +9,9 @@ export const CustomerContextProvider = ({ children }) => {
 
   useEffect(() => {
     const customer = localStorage.getItem("customer");
+    if (!customer) {
+      getCustomerFromDataBase();
+    }
     setCustomer(JSON.parse(customer));
     setLoading(false);
   }, []);
@@ -20,6 +24,16 @@ export const CustomerContextProvider = ({ children }) => {
   const addPaymentMethod = (paymentMethod) => {
     customer.paymentMethod = paymentMethod;
     storeCustomerData(customer);
+  };
+
+  const getCustomerFromDataBase = async () => {
+    const response = await getCustomer();
+    if (!response || response.error) {
+      return setCustomer(null);
+    }
+
+    setCustomer(response);
+    storeCustomerData(response);
   };
 
   const context = {
