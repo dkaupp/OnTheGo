@@ -5,11 +5,9 @@ const ShippingAddress = ({
 }) => {
   return (
     <div className="d-flex justify-content-between align-items-centeritems rounded">
-      <span className={styles.spanName}>DELIVERY ADDRESS</span>
-      <span className={styles.spanName}></span>
+      <span className={styles.spanName}>Delivety Address</span>
       <span className={styles.spanName}>
-        {address.toUpperCase()} {city.toUpperCase()} {postalCode}{" "}
-        {country.toUpperCase()}
+        {address}, {city}, {postalCode}, {country}
       </span>
     </div>
   );

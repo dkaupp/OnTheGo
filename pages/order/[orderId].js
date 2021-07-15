@@ -111,7 +111,6 @@ const OrderPage = ({ id }) => {
 export default OrderPage;
 
 export async function getServerSideProps(context) {
-  console.log(context.params);
   return {
     props: {
       id: context.params.orderId,

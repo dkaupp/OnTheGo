@@ -1,0 +1,19 @@
+.tableLink {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.tableLink:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.th {
+  font-size: 1.5rem;
+}
+
+.spanFinal {
+  /* text-align: end; */
+  font-weight: bold;
+  font-size: 1.1rem;
+}

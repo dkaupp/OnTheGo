@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { validate, validateProperty } from "../utils/validation";
 
-const useForm = ({ initialData, onSubmit, schema }) => {
+const useForm = ({ initialData, onSubmit, schema, mode }) => {
   const [data, setData] = useState(initialData || {});
   const [errors, setErrors] = useState(null);
 

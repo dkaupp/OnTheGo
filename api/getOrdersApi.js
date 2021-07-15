@@ -2,7 +2,6 @@ import http from "./http";
 import authStorage from "../auth/storage";
 
 const getOrdersApi = async (id) => {
-  console.log(id);
   const token = authStorage.getAuthToken();
   http.setJWT(token);
   try {

@@ -10,21 +10,14 @@ const schema = {
   name: Joi.string().min(5).max(30).required().label("Name"),
   email: Joi.string().email().min(5).max(30).required().label("Email"),
   password: Joi.string().min(5).max(30).required().label("Password"),
-  repassword: Joi.string()
-    .required()
-    .valid(Joi.ref("password"))
-    .options({
-      language: {
-        any: {
-          allowOnly: "!!Passwords do not match",
-        },
-      },
-    }),
+  repassword: Joi.string().min(5).max(30).required().label("Password"),
 };
 
 const Register = () => {
   const [loading, setLoading] = useState(true);
   const { user, register } = useContext(AuthContext);
+  const [updated, setUpdated] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoading(false);
@@ -40,11 +33,14 @@ const Register = () => {
       repassword: "",
     },
     async onSubmit(data) {
+      if (password !== repassword) return setError("Password does not match");
       const response = await registerApi(data);
       if (response.error) {
         return setErrors({ email: response.error, password: response.error });
       }
       register(response);
+      setError(null);
+      setUpdated(true);
       router.push("/");
     },
     schema,
@@ -153,6 +149,16 @@ const Register = () => {
               REGISTER
             </button>
           </form>
+          {updated && !error && (
+            <div className="success mt-3 bg-success text-white p-2">
+              PASSWORD UPDATED SUCCESSFULLY
+            </div>
+          )}
+          {error && (
+            <div className="success mt-3 bg-danger text-white p-2">
+              {error.toUpperCase()}
+            </div>
+          )}
         </div>
       </div>
     </div>

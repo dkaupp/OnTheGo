@@ -11,7 +11,7 @@ const TotalOrderTable = ({ totalAmount, totalQuantity }, final = false) => {
             className={final ? styles.spanName : styles.spanPrice}
             style={final ? null : { fontSize: "1.2rem" }}
           >
-            SUBTOTAL
+            Subtotal
           </span>
         </div>
         <div className="d-flex flex-row align-items-center">
@@ -27,7 +27,7 @@ const TotalOrderTable = ({ totalAmount, totalQuantity }, final = false) => {
             className={final ? styles.spanName : styles.spanPrice}
             style={final ? null : { fontSize: "1.2rem" }}
           >
-            SHIPPING
+            Shipping
           </span>
         </div>
 
@@ -44,7 +44,7 @@ const TotalOrderTable = ({ totalAmount, totalQuantity }, final = false) => {
             className={final ? styles.spanName : styles.spanPrice}
             style={final ? { textAlign: "initial" } : { fontSize: "1.2rem" }}
           >
-            TOTAL
+            Total
           </span>
         </div>
 

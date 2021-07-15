@@ -16,7 +16,7 @@ const TotalTable = ({ totalAmount, totalQuantity, updateCart, user }) => {
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <div className={styles.listDiv}>
-              <p className={styles.para}>SUBTOTAL {totalQuantity} ITEMS</p>
+              <p className={styles.para}>Subtotal {totalQuantity} Items</p>
             </div>
           </li>
           <li className="list-group-item">
