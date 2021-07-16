@@ -80,6 +80,11 @@ const EditUser = ({ id }) => {
           <form>
             <div className="mb-3">
               <h2 className="text-center">Eddit User</h2>
+              <div className="mb-3" onClick={() => router.push("/admin/users")}>
+                <button className="btn btn-outline-dark">
+                  GO BACK TO USERS
+                </button>
+              </div>
               <label htmlFor="name" className="form-label fs-5">
                 Name
               </label>

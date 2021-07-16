@@ -7,6 +7,7 @@ import styles from "../../../styles/Account.module.css";
 import TrashIcon from "../../../components/icons/TrashIcon";
 import { useRouter } from "next/router";
 import getAllUsersApi from "../../../api/getAllUsersApi";
+import deleteUserApi from "../../../api/deleteUserApi";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -42,13 +43,11 @@ const AdminUsers = () => {
   if (loading || loadingUsers) return <Spinner />;
 
   const handleDelete = async (id) => {
-    const response = await deleteOrder(id);
+    const response = await deleteUserApi(id);
     if (response.error) return setError(response.error);
 
-    getOrders();
+    getAllUsers();
   };
-
-  console.log(users);
 
   return (
     <div className="container mt-4">
