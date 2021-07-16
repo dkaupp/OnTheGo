@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 
 const schema = {
   email: Joi.string().email().min(5).max(30).required().label("Email"),
+  name: Joi.string().min(5).max(30).required().label("Name"),
 };
 
 const ChangeEmail = () => {
@@ -17,6 +18,7 @@ const ChangeEmail = () => {
   const [updated, setUpdated] = useState(false);
   const [initialData, setInitialData] = useState({
     email: "",
+    name: "",
   });
 
   const router = useRouter();

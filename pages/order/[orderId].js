@@ -92,7 +92,10 @@ const OrderPage = ({ id }) => {
           <hr />
           <ShippingAddress shippingAddress={order.shippingAddress} />
           <hr />
-          <DeliveryStatus delivery={order.delivery} />
+          <DeliveryStatus
+            delivery={order.delivery}
+            deliveredAt={order.deliveredAt}
+          />
           <hr />
           <div className="d-flex justify-content-end">
             {!order.isPaid && scriptLoaded && (

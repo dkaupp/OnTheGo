@@ -1,10 +1,10 @@
-const TrashIcon = () => {
+const TrashIcon = ({ width = "29", height = "28", color = "black" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="29"
-      height="28"
-      fill="currentColor"
+      width={width}
+      height={height}
+      fill={color}
       className="bi bi-trash"
       viewBox="0 0 16 16"
     >
