@@ -60,7 +60,7 @@ const Cart = ({ router }) => {
   return (
     <div className="container">
       <div className="row no-gutters">
-        <div className="col-md-8">
+        <div className="col-lg-8 col-md-12">
           {items &&
             items.map((item) => (
               <CartListItem
@@ -77,7 +77,7 @@ const Cart = ({ router }) => {
             </div>
           </Link>
         </div>
-        <div className="col-md-4">
+        <div className="col-lg-4 col-md-12">
           <TotalTable
             totalAmount={totalAmount}
             totalQuantity={totalQuantity}

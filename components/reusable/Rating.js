@@ -1,13 +1,13 @@
 import RatingIcons from "../icons/RatingIcons";
 import styles from "../../styles/Rating.module.css";
 
-function Rating({ rating }) {
+function Rating({ rating, numReviews }) {
   return (
-    <div>
+    <div className="d-flex align-items-center">
       <span className={styles.ratingSpan}>
         {rating >= 1 ? (
           <RatingIcons type="full" />
-        ) : value >= 0.5 ? (
+        ) : rating >= 0.5 ? (
           <RatingIcons type="half" />
         ) : (
           <RatingIcons type="non" />
@@ -16,7 +16,7 @@ function Rating({ rating }) {
       <span className={styles.ratingSpan}>
         {rating >= 2 ? (
           <RatingIcons type="full" />
-        ) : value >= 1.5 ? (
+        ) : rating >= 1.5 ? (
           <RatingIcons type="half" />
         ) : (
           <RatingIcons type="none" />
@@ -48,6 +48,12 @@ function Rating({ rating }) {
         ) : (
           <RatingIcons type="none" />
         )}
+      </span>
+      <span
+        className={styles.ratingSpan}
+        style={{ marginLeft: 10, marginTop: 3 }}
+      >
+        {numReviews} reviews
       </span>
     </div>
   );

@@ -44,7 +44,7 @@ const OrderPage = ({ id }) => {
 
     if (response.error) {
       console.log(data.error);
-      return setError(response.error);
+      return setError(response.error.error);
     }
     setOrder(response);
   };
@@ -55,11 +55,11 @@ const OrderPage = ({ id }) => {
     setLoading(false);
   }, []);
 
-  const handleSuccess = (paymentResult) => {
-    const paidOrder = payOrder(order._id, paymentResult);
+  const handleSuccess = async (paymentResult) => {
+    const paidOrder = await payOrder(order._id, paymentResult);
     if (!paidOrder)
       return setError({
-        message: "There was and error when paying the order.",
+        message: "There was and error while paying the order.",
       });
     router.reload();
   };
@@ -97,6 +97,11 @@ const OrderPage = ({ id }) => {
             deliveredAt={order.deliveredAt}
           />
           <hr />
+          {error && (
+            <div className="success mt-3 bg-danger text-white p-2">
+              {error.toUpperCase()}
+            </div>
+          )}
           <div className="d-flex justify-content-end">
             {!order.isPaid && scriptLoaded && (
               <PayPalButton

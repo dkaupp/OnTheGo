@@ -10,6 +10,7 @@ import DeliveryStatus from "../../../components/reusable/DeliveryStatus";
 import AuthContext from "../../../context/auth-context";
 import { useRouter } from "next/router";
 import setOrderStatus from "../../../api/setOrderStatus";
+import Link from "next/link";
 
 const EditOrder = ({ id }) => {
   const [order, setOrder] = useState(null);
@@ -67,7 +68,11 @@ const EditOrder = ({ id }) => {
         </div>
       </div>
       <div>
-        <button className="btn btn-outline-dark mt-2">GO BACK TO ORDERS</button>
+        <Link href="/admin">
+          <button className="btn btn-outline-dark mt-2">
+            GO BACK TO ORDERS
+          </button>
+        </Link>
       </div>
       <div className="row no-gutters justify-content-md-center">
         <div className="col-md-12 col-lg-12 col-xl-12">

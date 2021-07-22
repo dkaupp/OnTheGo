@@ -2,6 +2,7 @@ import { useContext } from "react";
 import AuthContext from "../../context/auth-context";
 import Link from "next/link";
 import NavIcons from "../icons/NavIcons";
+import Search from "../reusable/Search";
 
 function Header() {
   const { user, logOut } = useContext(AuthContext);
@@ -25,6 +26,7 @@ function Header() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
+            <Search />
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <NavIcons

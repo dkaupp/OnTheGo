@@ -17,6 +17,7 @@ const useForm = ({ initialData, onSubmit, schema, mode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const errors = validate(data, schema);
 
     if (errors !== null) return setErrors(errors);

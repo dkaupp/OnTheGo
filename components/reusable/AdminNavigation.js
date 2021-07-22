@@ -25,12 +25,22 @@ const AdminNavigation = ({ page }) => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/account/change-password">
+          <Link href="/admin/products">
             <a
-              className={`nav-link ${page === "password" && "active"}`}
+              className={`nav-link ${page === "products" && "active"}`}
               aria-current="page"
             >
               Products
+            </a>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/admin/categories">
+            <a
+              className={`nav-link ${page === "categories" && "active"}`}
+              aria-current="page"
+            >
+              Categories
             </a>
           </Link>
         </li>

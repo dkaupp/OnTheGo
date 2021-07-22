@@ -16,7 +16,10 @@ const TotalTable = ({ totalAmount, totalQuantity, updateCart, user }) => {
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <div className={styles.listDiv}>
-              <p className={styles.para}>Subtotal {totalQuantity} Items</p>
+              <p className={styles.title}>
+                Subtotal ({totalQuantity} {totalQuantity > 1 ? "Items" : "Item"}
+                )
+              </p>
             </div>
           </li>
           <li className="list-group-item">
@@ -26,7 +29,11 @@ const TotalTable = ({ totalAmount, totalQuantity, updateCart, user }) => {
           </li>
           <li className="list-group-item">
             <div className={styles.buttonsContainer}>
-              <button className="btn btn-secondary" onClick={handleClear}>
+              <button
+                className="btn btn-secondary"
+                style={{ width: "100%", marginRight: 2 }}
+                onClick={handleClear}
+              >
                 CLEAR CART
               </button>
               <Link
@@ -35,7 +42,12 @@ const TotalTable = ({ totalAmount, totalQuantity, updateCart, user }) => {
                   query: { checkout: "activated" },
                 }}
               >
-                <button className="btn btn-dark">CHECK OUT</button>
+                <button
+                  className="btn btn-dark"
+                  style={{ width: "100%", marginLeft: 2 }}
+                >
+                  CHECK OUT
+                </button>
               </Link>
             </div>
           </li>

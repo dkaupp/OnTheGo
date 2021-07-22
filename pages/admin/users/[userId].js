@@ -147,7 +147,7 @@ const EditUser = ({ id }) => {
               className="btn btn-dark"
               onClick={handleSubmit}
             >
-              REGISTER
+              EDDIT USER
             </button>
           </form>
           {updated && !error && (

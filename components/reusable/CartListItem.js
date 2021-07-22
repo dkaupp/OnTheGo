@@ -37,6 +37,7 @@ const CartListItem = ({ items: { item, quantity }, updateCart }) => {
           src={item.image.url}
           width={80}
           height={60}
+          alt={item.description}
         />
         <div className="m-2">
           <span className={styles.spanName}>{item.name.toUpperCase()}</span>

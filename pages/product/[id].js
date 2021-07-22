@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-
+import useForm from "../../hooks/useForm";
 import Link from "next/link";
 import Image from "next/image";
 import http from "../../api/http";
@@ -19,6 +19,7 @@ function Product({
     stock,
     qty: initialQuantity,
     _id,
+    numReviews,
   },
 }) {
   const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ function Product({
           <hr />
           <p className={styles.para}>Price : ${price}</p>
           <hr />
-          <Rating rating={rating ? rating : "4.0"} />
+          <Rating rating={rating} numReviews={numReviews} />
           <hr />
           <div>
             <div className="d-flex">
@@ -77,6 +78,15 @@ function Product({
             </div>
           </div>
           <hr />
+          <Link href={`/product/add-review/${_id}`}>
+            <button
+              className="btn btn-outline-dark"
+              disabled={stock <= 0 ? true : false}
+              style={{ marginRight: 10 }}
+            >
+              ADD REVIEW
+            </button>
+          </Link>
           <Link href={`/cart/?id=${_id}&qty=${qty - cartQuantity}`} as="/cart">
             <button
               className="btn btn-dark"

@@ -3,10 +3,12 @@ import ProductsContext from "../context/products-context";
 import CardItem from "../components/reusable/CardItem";
 import http from "../api/http";
 import Spinner from "../components/reusable/Spinner";
+import CategoriesContext from "../context/categories-context";
 
-export default function Home({ data }) {
+export default function Home({ data, categories }) {
   const [loading, setLoading] = useState(true);
   const { updateProducts } = useContext(ProductsContext);
+  const { updateCategories } = useContext(CategoriesContext);
 
   useEffect(() => {
     updateProducts(data);
@@ -30,10 +32,12 @@ export default function Home({ data }) {
 
 export async function getStaticProps() {
   const { data } = await http.get("/items");
+  const { data: categories } = await http.get("/category");
 
   if (!data) return { notFound: true };
+  if (!categories) return { notFound: true };
   return {
-    props: { data },
+    props: { data, categories },
     revalidate: 6000,
   };
 }
