@@ -37,8 +37,7 @@ const Account = () => {
     const response = await getOrdersApi(customerId);
 
     if (response.error) {
-      console.log(response.error);
-      return setOrdersError(response.error);
+      return setOrdersError(response.error.error);
     }
 
     setOrders(response);

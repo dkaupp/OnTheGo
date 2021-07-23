@@ -22,8 +22,7 @@ const AdminCategories = () => {
   const getCategories = async () => {
     const response = await getCategoriesApi();
     if (response.error) {
-      console.log(error);
-      setUserError(response.error);
+      setUserError(response.error.error);
     }
     setCategories(response);
   };
@@ -40,8 +39,7 @@ const AdminCategories = () => {
     const deletedCategory = await deleteCategoryApi(id);
 
     if (deletedCategory.error) {
-      console.log(deletedCategory.error);
-      setError(deletedCategory.error);
+      setError(deletedCategory.error.error);
     }
 
     getCategories();
@@ -49,7 +47,6 @@ const AdminCategories = () => {
 
   if (loading || !adminUser || !categories) return <Spinner />;
 
-  console.log(categories);
   return (
     <div className="container mt-4">
       <div className="row justify-content-md-center">

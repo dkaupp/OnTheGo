@@ -2,7 +2,6 @@ import http from "./http";
 import authStorage from "../auth/storage";
 
 const setOrderStatus = async (id) => {
-  console.log(id);
   const authToken = authStorage.getAuthToken();
   http.setJWT(authToken);
   try {

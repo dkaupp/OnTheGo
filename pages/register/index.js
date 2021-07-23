@@ -36,7 +36,10 @@ const Register = () => {
       if (password !== repassword) return setError("Password does not match");
       const response = await registerApi(data);
       if (response.error) {
-        return setErrors({ email: response.error, password: response.error });
+        return setErrors({
+          email: response.error.error,
+          password: response.error.error,
+        });
       }
       register(response);
       setError(null);

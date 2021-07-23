@@ -31,8 +31,7 @@ const newProduct = () => {
   const getCategories = async () => {
     const response = await getCategoriesApi();
     if (response.error) {
-      console.log(error);
-      setUserError(response.error);
+      setUserError(response.error.error);
     }
     setCategories(response);
   };
@@ -52,7 +51,6 @@ const newProduct = () => {
       stock: "",
     },
     async onSubmit(data) {
-      console.log(description, categoryId);
       const formData = new FormData();
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
       formData.append("description", description);
@@ -62,9 +60,8 @@ const newProduct = () => {
       const newProduct = await createProductApi(formData);
 
       if (newProduct.error) {
-        console.log(newProduct.error);
         setUploading(false);
-        return setError(newProduct.error);
+        return setError(newProduct.error.error);
       }
 
       if (newProduct) {
@@ -79,7 +76,6 @@ const newProduct = () => {
 
   const { name, stock, price } = data;
 
-  console.log(categories);
   return (
     <div className="container mt-4">
       <div className="row justify-content-md-center">

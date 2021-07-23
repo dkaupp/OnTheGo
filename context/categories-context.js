@@ -12,7 +12,6 @@ export function CategoriesContextProvider({ children, initialCategories }) {
   const getCategories = async () => {
     const response = await getCategoriesApi();
     if (response.error) {
-      console.log(error);
       setError(response.error);
     }
     setCategories(response);

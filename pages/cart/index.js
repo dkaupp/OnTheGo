@@ -7,6 +7,7 @@ import CartListItem from "../../components/reusable/CartListItem";
 import Spiner from "../../components/reusable/Spinner";
 import TotalTable from "../../components/reusable/TotalTable";
 import styles from "../../styles/Cart.module.css";
+import Head from "next/head";
 
 const Cart = ({ router }) => {
   const [loading, setLoading] = useState(true);
@@ -41,52 +42,65 @@ const Cart = ({ router }) => {
 
   if (!cart)
     return (
-      <div className="container">
-        <div className="row no-gutters mt-4 text-center">
-          <h3>There are no items in the cart</h3>
-          <Link href={"/"}>
-            <div className={styles.cartButton}>
-              <button className="btn btn-outline-dark">
-                CONTINUE SHOPPING
-              </button>
-            </div>
-          </Link>
+      <>
+        <Head>
+          <title>Shopping Cart</title>
+          <meta name="description" content="Add items to the shopping cart" />
+        </Head>
+        <div className="container">
+          <div className="row no-gutters mt-4 text-center">
+            <h3>There are no items in the cart</h3>
+            <Link href={"/"}>
+              <div className={styles.cartButton}>
+                <button className="btn btn-outline-dark">
+                  CONTINUE SHOPPING
+                </button>
+              </div>
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     );
 
   const { cart: items, totalAmount, totalQuantity } = cart;
 
   return (
-    <div className="container">
-      <div className="row no-gutters">
-        <div className="col-lg-8 col-md-12">
-          {items &&
-            items.map((item) => (
-              <CartListItem
-                key={item.item._id}
-                items={item}
-                updateCart={updateCart}
-              />
-            ))}
-          <Link href={"/"}>
-            <div className={styles.cartButton}>
-              <button className="btn btn-outline-dark">
-                CONTINUE SHOPPING
-              </button>
-            </div>
-          </Link>
-        </div>
-        <div className="col-lg-4 col-md-12">
-          <TotalTable
-            totalAmount={totalAmount}
-            totalQuantity={totalQuantity}
-            updateCart={updateCart}
-            user={user}
-          />
+    <>
+      <Head>
+        <title>Shopping Cart</title>
+        <meta name="description" content="Shopping cart page" />
+      </Head>
+
+      <div className="container">
+        <div className="row no-gutters">
+          <div className="col-lg-8 col-md-12">
+            {items &&
+              items.map((item) => (
+                <CartListItem
+                  key={item.item._id}
+                  items={item}
+                  updateCart={updateCart}
+                />
+              ))}
+            <Link href={"/"}>
+              <div className={styles.cartButton}>
+                <button className="btn btn-outline-dark">
+                  CONTINUE SHOPPING
+                </button>
+              </div>
+            </Link>
+          </div>
+          <div className="col-lg-4 col-md-12">
+            <TotalTable
+              totalAmount={totalAmount}
+              totalQuantity={totalQuantity}
+              updateCart={updateCart}
+              user={user}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

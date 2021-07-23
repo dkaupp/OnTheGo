@@ -28,11 +28,9 @@ const addReview = ({ id }) => {
       rating: "",
     },
     async onSubmit(data) {
-      console.log(data);
       const newReview = await addProductReviewApi(id, data);
 
       if (newReview.error) {
-        console.log(newReview.error);
         return setError(newReview.error.error);
       }
       router.push(`/product/${id}`);

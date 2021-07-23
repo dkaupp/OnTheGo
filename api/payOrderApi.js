@@ -8,7 +8,6 @@ const payorderApi = async (id, paymentResult) => {
     const { data } = await http.put(`/order/${id}/pay`, {
       paymentResult,
     });
-    console.log(data);
     return data;
   } catch (error) {
     if (error.response && error.response.status === 400) {

@@ -28,8 +28,7 @@ const EditCategory = ({ id }) => {
     const response = await getCategoryApi(id);
 
     if (response.error) {
-      console.log(response.error);
-      setError(response.error);
+      setError(response.error.error);
     }
     setInitialData({ name: response.name });
   };
@@ -45,11 +44,9 @@ const EditCategory = ({ id }) => {
     useFormShipping({
       initialData,
       async onSubmit(data) {
-        console.log(data);
         const newCategory = await createCategoryApi(data, id);
 
         if (newCategory.error) {
-          console.log(newCategory.error);
           return setError(newCategory.error);
         }
 

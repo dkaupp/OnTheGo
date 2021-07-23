@@ -39,8 +39,7 @@ const EditProduct = ({ id }) => {
   const getProduct = async () => {
     const response = await getProductApi(id);
     if (response.error) {
-      console.log(error);
-      setUserError(response.error);
+      setUserError(response.error.error);
     }
     setProduct(response);
     setInitialData({
@@ -56,8 +55,7 @@ const EditProduct = ({ id }) => {
   const getCategories = async () => {
     const response = await getCategoriesApi();
     if (response.error) {
-      console.log(error);
-      setUserError(response.error);
+      setUserError(response.error.error);
     }
     setCategories(response);
   };
@@ -91,9 +89,8 @@ const EditProduct = ({ id }) => {
         }
 
         if (newProduct.error) {
-          console.log(newProduct.error);
           setUploading(false);
-          return setError(newProduct.error);
+          return setError(newProduct.error.error);
         }
 
         if (newProduct) {

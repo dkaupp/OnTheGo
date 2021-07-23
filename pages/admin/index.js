@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 const Admin = () => {
   const [orders, setOrders] = useState([]);
-  const [ordersError, setOrdersError] = useState(null);
+  const [setOrdersError] = useState(null);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,7 +23,6 @@ const Admin = () => {
     const response = await getAllOrdersApi();
 
     if (response.error) {
-      console.log(response.error);
       return setOrdersError(response.error);
     }
 

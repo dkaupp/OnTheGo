@@ -33,8 +33,7 @@ const createNewCategory = () => {
       const newCategory = await createCategoryApi(data);
 
       if (newCategory.error) {
-        console.log(newCategory.error);
-        return setError(newCategory.error);
+        return setError(newCategory.error.error);
       }
 
       router.push("/admin/categories");

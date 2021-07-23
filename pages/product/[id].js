@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import useForm from "../../hooks/useForm";
+import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import http from "../../api/http";
@@ -52,52 +52,61 @@ function Product({
   if (loading) return <Spinner />;
 
   return (
-    <div className="container mt-4">
-      <div className="row">
-        <div className="col-lg-6 col-md-12">
-          <Image src={image.url} height={600} width={800} alt={description} />
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <h2>{name.toUpperCase()}</h2>
-          <hr />
-          <p className="mt-4">{description}</p>
-          <hr />
-          <p className={styles.para}>Price : ${price}</p>
-          <hr />
-          <Rating rating={rating} numReviews={numReviews} />
-          <hr />
-          <div>
-            <div className="d-flex">
-              <div onClick={() => handleQtyChange("-")}>
-                <QuantyIcon type="-" />
-              </div>
-              <span className={styles.spanRating}>{qty}</span>
-              <div onClick={() => handleQtyChange("+")}>
-                <QuantyIcon />
+    <>
+      <Head>
+        <title>{name}</title>
+        <meta name="description" content={description} />
+      </Head>
+      <div className="container mt-4">
+        <div className="row">
+          <div className="col-lg-6 col-md-12">
+            <Image src={image.url} height={600} width={800} alt={description} />
+          </div>
+          <div className="col-lg-4 col-md-6">
+            <h2>{name.toUpperCase()}</h2>
+            <hr />
+            <p className="mt-4">{description}</p>
+            <hr />
+            <p className={styles.para}>Price : ${price}</p>
+            <hr />
+            <Rating rating={rating} numReviews={numReviews} />
+            <hr />
+            <div>
+              <div className="d-flex">
+                <div onClick={() => handleQtyChange("-")}>
+                  <QuantyIcon type="-" />
+                </div>
+                <span className={styles.spanRating}>{qty}</span>
+                <div onClick={() => handleQtyChange("+")}>
+                  <QuantyIcon />
+                </div>
               </div>
             </div>
+            <hr />
+            <Link href={`/product/add-review/${_id}`}>
+              <button
+                className="btn btn-outline-dark"
+                disabled={stock <= 0 ? true : false}
+                style={{ marginRight: 10 }}
+              >
+                ADD REVIEW
+              </button>
+            </Link>
+            <Link
+              href={`/cart/?id=${_id}&qty=${qty - cartQuantity}`}
+              as="/cart"
+            >
+              <button
+                className="btn btn-dark"
+                disabled={stock <= 0 ? true : false}
+              >
+                ADD TO CART
+              </button>
+            </Link>
           </div>
-          <hr />
-          <Link href={`/product/add-review/${_id}`}>
-            <button
-              className="btn btn-outline-dark"
-              disabled={stock <= 0 ? true : false}
-              style={{ marginRight: 10 }}
-            >
-              ADD REVIEW
-            </button>
-          </Link>
-          <Link href={`/cart/?id=${_id}&qty=${qty - cartQuantity}`} as="/cart">
-            <button
-              className="btn btn-dark"
-              disabled={stock <= 0 ? true : false}
-            >
-              ADD TO CART
-            </button>
-          </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

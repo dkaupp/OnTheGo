@@ -31,7 +31,6 @@ const EditUser = ({ id }) => {
   const getUser = async () => {
     const response = await getUserApi(id);
     if (response.error) {
-      console.log(error);
       setUserError(response.error);
     }
     setUser(response);

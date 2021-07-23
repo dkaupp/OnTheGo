@@ -29,8 +29,7 @@ export const OrderContextProvider = ({ children }) => {
   const placeOrder = async (shipping, paymentMethod) => {
     const newOrder = await orderApi(shipping, paymentMethod);
     if (newOrder.error) {
-      console.log(newOrder.error);
-      return setError(newOrder.error);
+      return setError(newOrder.error.error);
     }
     storeOrderData(newOrder);
     return newOrder;
@@ -44,8 +43,7 @@ export const OrderContextProvider = ({ children }) => {
     const paidOrder = await payorderApi(id, paymentResult);
 
     if (paidOrder.error) {
-      console.log(paidOrder.error);
-      return setPayingError(paidOrder.error);
+      return setPayingError(paidOrder.error.error);
     }
     setPaySuccess(true);
     localStorage.removeItem("cartToken");

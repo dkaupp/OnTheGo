@@ -33,8 +33,7 @@ const EditOrder = ({ id }) => {
     const response = await getOrderApi(id);
 
     if (response.error) {
-      console.log(data.error);
-      return setError(response.error);
+      return setError(response.error.error);
     }
     setOrder(response);
   };

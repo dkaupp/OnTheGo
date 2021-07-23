@@ -23,8 +23,7 @@ const AdminUsers = () => {
     const response = await getAllUsersApi();
 
     if (response.error) {
-      console.log(response.error);
-      return setUsersError(response.error);
+      return setUsersError(response.error.error);
     }
 
     setUsers(response);

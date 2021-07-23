@@ -21,8 +21,7 @@ const AdminProducts = () => {
     const response = await getAllProductsApi();
 
     if (response.error) {
-      console.log(error);
-      return setError(response.error);
+      return setError(response.error.error);
     }
     setProducts(response);
   };
@@ -41,8 +40,7 @@ const AdminProducts = () => {
     const deletedProduct = await deleteProductApi(id);
 
     if (deletedProduct.error) {
-      console.log(deletedProduct.error);
-      setError(deletedProduct.error);
+      setError(deletedProduct.error.error);
     }
 
     getProducts();

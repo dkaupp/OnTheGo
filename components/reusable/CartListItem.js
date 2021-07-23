@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import router, { useRouter } from "next/router";
+import { useContext, useState } from "react";
 import Image from "next/image";
 import TrashIcon from "../../components/icons/TrashIcon";
 import QuantityIcons from "../icons/QuantityIcons";
@@ -7,6 +6,8 @@ import styles from "../../styles/CartList.module.css";
 import CartContext from "../../context/cart-context";
 
 const CartListItem = ({ items: { item, quantity }, updateCart }) => {
+  const [error, setError] = useState(null);
+
   const { removeItemFromCart, addItemToCart, deleteItemFromCart, clearCart } =
     useContext(CartContext);
 
@@ -16,7 +17,7 @@ const CartListItem = ({ items: { item, quantity }, updateCart }) => {
       updateCart();
     } else {
       if (item.stock <= quantity) {
-        console.log("Not enought items in stock");
+        setError("Not enought items in stock");
       } else {
         await addItemToCart(item._id);
         updateCart();

@@ -6,6 +6,7 @@ const CartContext = createContext(null);
 
 export function CartContextProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [error, setError] = useState(null);
 
   const tokenKey = "cartToken";
 
@@ -26,7 +27,7 @@ export function CartContextProvider({ children }) {
       localStorage.setItem(tokenKey, cartToken);
       setCart(newCart);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
@@ -43,7 +44,7 @@ export function CartContextProvider({ children }) {
       localStorage.setItem(tokenKey, cartToken);
       setCart(newCart);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
@@ -60,7 +61,7 @@ export function CartContextProvider({ children }) {
 
       setCart(newCart);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
@@ -95,7 +96,7 @@ export function CartContextProvider({ children }) {
 
       return newCart;
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 

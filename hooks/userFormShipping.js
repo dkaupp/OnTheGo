@@ -22,11 +22,8 @@ const useFormShipping = ({ initialData, onSubmit, schema }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(data);
-
     const errors = validate(data, schema);
 
-    console.log(errors);
     if (errors !== null) return setErrors(errors);
 
     onSubmit(data);

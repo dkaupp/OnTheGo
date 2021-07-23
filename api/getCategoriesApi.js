@@ -6,7 +6,6 @@ const getCategoriesApi = async () => {
     return data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      console.log(error.response.data);
       return error.response.data;
     }
   }
