@@ -28,12 +28,11 @@ export default function Home({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { data } = await http.get("/items");
 
   if (!data) return { notFound: true };
   return {
     props: { data },
-    revalidate: 6000,
   };
 }
