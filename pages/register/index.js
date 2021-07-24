@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import useForm from "../../hooks/useForm";
-import registerApi from "../../api/registerApi";
+import registerApi from "../../services/registerApi";
 import Joi from "joi-browser";
 import AuthContext from "../../context/auth-context";
 import Spinner from "../../components/reusable/Spinner";
