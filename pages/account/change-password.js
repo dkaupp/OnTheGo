@@ -37,7 +37,7 @@ const ChangePassword = () => {
       });
     }
     setLoading(false);
-  }, []);
+  }, [user, loadingUser, router]);
 
   const { data, errors, handleChange, handleSubmit, setErrors } =
     useFormShipping({
@@ -100,7 +100,7 @@ const ChangePassword = () => {
                   Confirm Password
                 </label>
                 <input
-                  type="repassword"
+                  type="password"
                   className="form-control"
                   id="repassword"
                   name="repassword"

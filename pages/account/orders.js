@@ -32,7 +32,7 @@ const Orders = () => {
     }
     setLoading(false);
     setLoadingOrders(false);
-  }, [user]);
+  }, [user, customer]);
 
   if (loading) return <Spinner />;
 
@@ -65,7 +65,7 @@ const Orders = () => {
                 <tbody>
                   {orders.map((order) => (
                     <tr key={order._id}>
-                      <Link href={`/order/${order._id}`}>
+                      <Link href={`/order/${order._id}`} passHref>
                         <td className={styles.tableLink}>{order._id}</td>
                       </Link>
                       <td className={styles.spanFinal}>

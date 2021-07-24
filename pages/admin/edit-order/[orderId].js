@@ -29,23 +29,23 @@ const EditOrder = ({ id }) => {
 
   const router = useRouter();
 
-  const getOrderById = async () => {
-    const response = await getOrderApi(id);
-
-    if (response.error) {
-      return setError(response.error.error);
-    }
-    setOrder(response);
-  };
-
   useEffect(() => {
     if (!user && !loadingUser && !user.isAdmin) {
       return router.replace("/");
     }
 
+    const getOrderById = async () => {
+      const response = await getOrderApi(id);
+
+      if (response.error) {
+        return setError(response.error.error);
+      }
+      setOrder(response);
+    };
+
     getOrderById();
     setLoading(false);
-  }, [user, loadingUser]);
+  }, [user, loadingUser, router, id]);
 
   if (loading || !order || loadingUser) return <Spinner />;
   const { cart: items } = order;
@@ -67,7 +67,7 @@ const EditOrder = ({ id }) => {
         </div>
       </div>
       <div>
-        <Link href="/admin">
+        <Link href="/admin" passHref>
           <button className="btn btn-outline-dark mt-2">
             GO BACK TO ORDERS
           </button>

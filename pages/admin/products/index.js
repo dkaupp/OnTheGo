@@ -34,7 +34,7 @@ const AdminProducts = () => {
 
     getProducts();
     setLoading(false);
-  }, []);
+  }, [loadingUser, router, user]);
 
   const handleDelete = async (id) => {
     const deletedProduct = await deleteProductApi(id);
@@ -67,7 +67,7 @@ const AdminProducts = () => {
             <tbody>
               {products.map((p) => (
                 <tr key={p._id}>
-                  <Link href={`/admin/products/${p._id}`}>
+                  <Link href={`/admin/products/${p._id}`} passHref>
                     <td className={styles.tableLink}>{p._id}</td>
                   </Link>
                   <td className={styles.spanFinal}>{p.name}</td>
@@ -83,7 +83,7 @@ const AdminProducts = () => {
             </tbody>
           </table>
           <div className="d-flex justify-content-end">
-            <Link href={"/admin/products/new-product"}>
+            <Link href={"/admin/products/new-product"} passHref>
               <button className="btn btn-dark">ADD NEW PRODUCT</button>
             </Link>
           </div>

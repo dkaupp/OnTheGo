@@ -37,7 +37,7 @@ const AdminUsers = () => {
     if (user && !user.isAdmin) return router.replace("/");
     getAllUsers();
     setLoading(false);
-  }, []);
+  }, [user, loadingUser, router]);
 
   if (loading || loadingUsers) return <Spinner />;
 
@@ -67,7 +67,7 @@ const AdminUsers = () => {
             <tbody>
               {users.map((u) => (
                 <tr key={u._id}>
-                  <Link href={`/admin/users/${u._id}`}>
+                  <Link href={`/admin/users/${u._id}`} passHref>
                     <td className={styles.tableLink}>{u._id}</td>
                   </Link>
                   <td className={styles.spanFinal}>{u.name}</td>

@@ -41,6 +41,7 @@ const TotalTable = ({ totalAmount, totalQuantity, updateCart, user }) => {
                   pathname: user ? "/checkout/shipping" : "/singin",
                   query: { checkout: "activated" },
                 }}
+                passHref
               >
                 <button
                   className="btn btn-dark"

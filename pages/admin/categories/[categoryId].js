@@ -6,7 +6,6 @@ import Joi from "joi-browser";
 import useFormShipping from "../../../hooks/userFormShipping";
 import createCategoryApi from "../../../api/createCategoryApi";
 import getCategoryApi from "../../../api/getCategoryApi";
-import { get } from "lodash";
 
 const schema = {
   name: Joi.string().min(3).max(30).required().label("Name"),
@@ -24,21 +23,22 @@ const EditCategory = ({ id }) => {
 
   const router = useRouter();
 
-  const getCategory = async () => {
-    const response = await getCategoryApi(id);
-
-    if (response.error) {
-      setError(response.error.error);
-    }
-    setInitialData({ name: response.name });
-  };
-
   useEffect(() => {
     if (!adminUser && !loadingAdminUser) return router.reaplace("/");
     if (adminUser && !adminUser.isAdmin) return router.replace("/");
+
+    const getCategory = async () => {
+      const response = await getCategoryApi(id);
+
+      if (response.error) {
+        setError(response.error.error);
+      }
+      setInitialData({ name: response.name });
+    };
+
     getCategory();
     setLoading(false);
-  }, [adminUser]);
+  }, [adminUser, loadingAdminUser, router, id]);
 
   const { data, errors, handleChange, handleSubmit, setErrors } =
     useFormShipping({

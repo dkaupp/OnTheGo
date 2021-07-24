@@ -33,7 +33,7 @@ const AdminCategories = () => {
 
     getCategories();
     setLoading(false);
-  }, [adminUser]);
+  }, [adminUser, loadingAdminUser, router]);
 
   const handleDelete = async (id) => {
     const deletedCategory = await deleteCategoryApi(id);
@@ -64,7 +64,7 @@ const AdminCategories = () => {
             <tbody>
               {categories.map((c) => (
                 <tr key={c._id}>
-                  <Link href={`/admin/categories/${c._id}`}>
+                  <Link href={`/admin/categories/${c._id}`} passHref>
                     <td className={styles.tableLink}>{c._id}</td>
                   </Link>
                   <td className={styles.spanFinal}>{c.name}</td>
@@ -81,7 +81,7 @@ const AdminCategories = () => {
             </tbody>
           </table>
           <div className="d-flex justify-content-end">
-            <Link href={"/admin/categories/new-category"}>
+            <Link href={"/admin/categories/new-category"} passHref>
               <button className="btn btn-dark">ADD NEW CATEGORY</button>
             </Link>
           </div>

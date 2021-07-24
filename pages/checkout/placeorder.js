@@ -20,7 +20,7 @@ const PlaceOrder = () => {
 
   useEffect(() => {
     if (!customer && loading === false) router.push("/cart");
-  }, [customer, loading, cart]);
+  }, [customer, loading, cart, router]);
 
   if (loading) return <Spinner />;
 
@@ -64,7 +64,7 @@ const PlaceOrder = () => {
               final={true}
             />
             <div className="d-flex justify-content-end">
-              <Link href={"/cart"}>
+              <Link href={"/cart"} passHref>
                 <div>
                   <button
                     className="btn btn-outline-dark"

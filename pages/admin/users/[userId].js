@@ -28,26 +28,26 @@ const EditUser = ({ id }) => {
 
   const router = useRouter();
 
-  const getUser = async () => {
-    const response = await getUserApi(id);
-    if (response.error) {
-      setUserError(response.error);
-    }
-    setUser(response);
-    setInitialData({
-      name: response.name,
-      email: response.email,
-    });
-    setAdmin(response.isAdmin ? true : false);
-  };
-
   useEffect(() => {
     if (!adminUser && !loadingAdminUser) return router.reaplace("/");
     if (adminUser && !adminUser.isAdmin) return router.replace("/");
 
+    const getUser = async () => {
+      const response = await getUserApi(id);
+      if (response.error) {
+        setUserError(response.error);
+      }
+      setUser(response);
+      setInitialData({
+        name: response.name,
+        email: response.email,
+      });
+      setAdmin(response.isAdmin ? true : false);
+    };
+
     getUser();
     setLoading(false);
-  }, [adminUser, updated]);
+  }, [adminUser, updated, id, loadingAdminUser, router]);
 
   const { data, errors, handleChange, handleSubmit, setErrors } =
     useFormShipping({

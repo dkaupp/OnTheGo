@@ -31,7 +31,7 @@ const Cart = ({ router }) => {
   useEffect(() => {
     populateComponent(id, qty);
     setLoading(false);
-  }, [id, qty]);
+  }, [id]);
 
   if (loading) return <Spiner />;
 
@@ -50,7 +50,7 @@ const Cart = ({ router }) => {
         <div className="container">
           <div className="row no-gutters mt-4 text-center">
             <h3>There are no items in the cart</h3>
-            <Link href={"/"}>
+            <Link href={"/"} passHref>
               <div className={styles.cartButton}>
                 <button className="btn btn-outline-dark">
                   CONTINUE SHOPPING
@@ -82,7 +82,7 @@ const Cart = ({ router }) => {
                   updateCart={updateCart}
                 />
               ))}
-            <Link href={"/"}>
+            <Link href={"/"} passHref>
               <div className={styles.cartButton}>
                 <button className="btn btn-outline-dark">
                   CONTINUE SHOPPING

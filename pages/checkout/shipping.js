@@ -29,35 +29,36 @@ const Shipping = () => {
     country: "",
   });
 
-  const fillCustomerShipping = async () => {
-    try {
-      const response = await customerApi();
-
-      if (response.error) {
-        return setError(response.error);
-      }
-
-      const {
-        name,
-        shippingAddress: { address, city, postalCode, country },
-      } = response;
-
-      setInitialData({
-        name,
-        address,
-        city,
-        postalCode,
-        country,
-      });
-    } catch (error) {
-      setError(error);
-    }
-  };
-
   useEffect(() => {
     if (!user && loading === false) window.location.href = "/";
+
+    const fillCustomerShipping = async () => {
+      try {
+        const response = await customerApi();
+
+        if (response.error) {
+          return setError(response.error);
+        }
+
+        const {
+          name,
+          shippingAddress: { address, city, postalCode, country },
+        } = response;
+
+        setInitialData({
+          name,
+          address,
+          city,
+          postalCode,
+          country,
+        });
+      } catch (error) {
+        setError(error);
+      }
+    };
+
     fillCustomerShipping();
-  }, [user, loading]);
+  }, [user, loading, setError]);
 
   const { data, errors, handleChange, handleSubmit, setErrors } =
     useFormShipping({

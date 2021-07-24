@@ -11,7 +11,7 @@ const schema = {
   rating: Joi.number().min(1).max(5).required().label("Rating"),
 };
 
-const addReview = ({ id }) => {
+const AddReview = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user, loading: loadingUser } = useContext(AuthContext);
@@ -20,7 +20,7 @@ const addReview = ({ id }) => {
   useEffect(() => {
     if (!user && !loadingUser) return router.replace("/");
     setLoading(false);
-  }, [user]);
+  }, [user, loadingUser, router]);
 
   const { data, errors, handleChange, handleSubmit, setErrors } = useForm({
     initialData: {
@@ -120,7 +120,7 @@ const addReview = ({ id }) => {
   );
 };
 
-export default addReview;
+export default AddReview;
 
 export async function getServerSideProps(context) {
   return {

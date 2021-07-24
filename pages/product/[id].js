@@ -28,18 +28,18 @@ function Product({
 
   const [cartQuantity, setCartQuantity] = useState(0);
 
-  function getQuantity() {
-    const cart = getCartLocal();
-    if (cart) {
-      const item = cart.cart.find((c) => c.item._id === _id);
-      item && setCartQuantity(item.quantity);
-    }
-  }
-
   useEffect(() => {
+    function getQuantity() {
+      const cart = getCartLocal();
+      if (cart) {
+        const item = cart.cart.find((c) => c.item._id === _id);
+        item && setCartQuantity(item.quantity);
+      }
+    }
+
     getQuantity();
     setLoading(false);
-  }, []);
+  }, [_id, getCartLocal]);
 
   const handleQtyChange = (operator) => {
     if (operator === "-" && qty > 1) {
@@ -83,7 +83,7 @@ function Product({
               </div>
             </div>
             <hr />
-            <Link href={`/product/add-review/${_id}`}>
+            <Link href={`/product/add-review/${_id}`} passHref>
               <button
                 className="btn btn-outline-dark"
                 disabled={stock <= 0 ? true : false}
@@ -95,6 +95,7 @@ function Product({
             <Link
               href={`/cart/?id=${_id}&qty=${qty - cartQuantity}`}
               as="/cart"
+              passHref
             >
               <button
                 className="btn btn-dark"
@@ -112,18 +113,19 @@ function Product({
 
 export default Product;
 
-export async function getStaticPaths() {
-  const { data: products } = await http.get("/items");
-  const paths = products.map((product) => ({ params: { id: product._id } }));
-  return {
-    paths,
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   const { data: products } = await http.get("/items");
+//   const paths = products.map((product) => ({ params: { id: product._id } }));
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
-export async function getStaticProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id } }) {
   const { data: product } = await http.get(`items/${id}`);
   product.qty = 1;
+
   return {
     props: {
       product,

@@ -18,6 +18,7 @@ const OrderPage = ({ id }) => {
   const [order, setOrder] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const { payOrder } = useContext(OrderContext);
 
   const paypalScript = async () => {
@@ -40,20 +41,20 @@ const OrderPage = ({ id }) => {
     document.body.appendChild(script);
   };
 
-  const getOrderById = async () => {
-    const response = await getOrderApi(id);
-
-    if (response.error) {
-      return setError(response.error.error);
-    }
-    setOrder(response);
-  };
-
   useEffect(() => {
+    const getOrderById = async () => {
+      const response = await getOrderApi(id);
+
+      if (response.error) {
+        return setError(response.error.error);
+      }
+      setOrder(response);
+    };
+
     getOrderById();
     paypalScript();
     setLoading(false);
-  }, []);
+  }, [id]);
 
   const handleSuccess = async (paymentResult) => {
     const paidOrder = await payOrder(order._id, paymentResult);
@@ -61,6 +62,7 @@ const OrderPage = ({ id }) => {
       return setError({
         message: "There was and error while paying the order.",
       });
+    setPaymentSuccess(true);
     router.reload();
   };
 
@@ -115,6 +117,11 @@ const OrderPage = ({ id }) => {
                 />
               )}
             </div>
+            {paymentSuccess && (
+              <div className="success mt-3 bg-success text-white p-2">
+                ORDER WAS PAID SUCCESSFULLY. THANKS !
+              </div>
+            )}
           </div>
         </div>
       </div>

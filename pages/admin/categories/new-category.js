@@ -10,7 +10,7 @@ const schema = {
   name: Joi.string().min(5).max(30).required().label("Name"),
 };
 
-const createNewCategory = () => {
+const CreateNewCategory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -23,7 +23,7 @@ const createNewCategory = () => {
     if (!adminUser && !loadingAdminUser) return router.reaplace("/");
     if (adminUser && !adminUser.isAdmin) return router.replace("/");
     setLoading(false);
-  }, [adminUser]);
+  }, [adminUser, loadingAdminUser, router]);
 
   const { data, errors, handleChange, handleSubmit, setErrors } = useForm({
     initialData: {
@@ -91,4 +91,4 @@ const createNewCategory = () => {
   );
 };
 
-export default createNewCategory;
+export default CreateNewCategory;

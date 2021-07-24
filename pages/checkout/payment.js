@@ -4,14 +4,14 @@ import CustomerContext from "../../context/customer-context";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-const index = () => {
+const Payment = () => {
   const router = useRouter();
   const { customer, loading, addPaymentMethod } = useContext(CustomerContext);
   const [paymentMethod, setPaymentMethod] = useState("Paypal");
 
   useEffect(() => {
     if (!customer && loading === false) router.push("/checkout/shipping");
-  }, [customer, loading]);
+  }, [customer, loading, router]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,4 +64,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Payment;

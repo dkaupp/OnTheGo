@@ -14,7 +14,7 @@ const schema = {
   stock: Joi.number().required().label("Stock"),
 };
 
-const newProduct = () => {
+const NewProduct = () => {
   const [categories, setCategories] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,7 +42,7 @@ const newProduct = () => {
 
     getCategories();
     setLoading(false);
-  }, [adminUser]);
+  }, [adminUser, loadingAdminUser, router]);
 
   const { data, errors, handleChange, handleSubmit, setErrors } = useForm({
     initialData: {
@@ -229,4 +229,4 @@ const newProduct = () => {
   );
 };
 
-export default newProduct;
+export default NewProduct;

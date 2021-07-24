@@ -36,71 +36,70 @@ const EditProduct = ({ id }) => {
 
   const router = useRouter();
 
-  const getProduct = async () => {
-    const response = await getProductApi(id);
-    if (response.error) {
-      setUserError(response.error.error);
-    }
-    setProduct(response);
-    setInitialData({
-      name: response.name,
-      stock: response.stock,
-      price: response.price,
-    });
-
-    setCategoryId(response.category._id);
-    setDescription(response.description);
-  };
-
-  const getCategories = async () => {
-    const response = await getCategoriesApi();
-    if (response.error) {
-      setUserError(response.error.error);
-    }
-    setCategories(response);
-  };
-
   useEffect(() => {
     if (!adminUser && !loadingAdminUser) return router.reaplace("/");
     if (adminUser && !adminUser.isAdmin) return router.replace("/");
 
+    const getProduct = async () => {
+      const response = await getProductApi(id);
+      if (response.error) {
+        setUserError(response.error.error);
+      }
+      setProduct(response);
+      setInitialData({
+        name: response.name,
+        stock: response.stock,
+        price: response.price,
+      });
+
+      setCategoryId(response.category._id);
+      setDescription(response.description);
+    };
+
+    const getCategories = async () => {
+      const response = await getCategoriesApi();
+      if (response.error) {
+        setUserError(response.error.error);
+      }
+      setCategories(response);
+    };
+
     getProduct();
     getCategories();
     setLoading(false);
-  }, [adminUser, updated]);
+  }, [adminUser, updated, router, loadingAdminUser, id]);
 
-  const { data, errors, handleChange, handleSubmit, setErrors } =
-    useFormShipping({
-      initialData,
-      async onSubmit(data) {
-        const formData = new FormData();
-        Object.keys(data).forEach((key) => formData.append(key, data[key]));
-        formData.append("description", description);
-        formData.append("categoryId", categoryId);
-        let newProduct;
+  const { data, errors, handleChange, handleSubmit } = useFormShipping({
+    initialData,
+    async onSubmit(data) {
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+      formData.append("description", description);
+      formData.append("categoryId", categoryId);
+      let newProduct;
 
-        if (selectedFile === "Choose File") {
-          setUploading(true);
-          newProduct = await updateProductNoImageApi(formData, id);
-        } else {
-          setUploading(true);
-          formData.append("image", selectedFile);
-          newProduct = await updateProductApi(formData, id);
-        }
+      if (selectedFile === "Choose File") {
+        setUploading(true);
+        newProduct = await updateProductNoImageApi(formData, id);
+      } else {
+        setUploading(true);
+        formData.append("image", selectedFile);
+        newProduct = await updateProductApi(formData, id);
+      }
 
-        if (newProduct.error) {
-          setUploading(false);
-          return setError(newProduct.error.error);
-        }
+      if (newProduct.error) {
+        setUploading(false);
+        return setError(newProduct.error.error);
+      }
 
-        if (newProduct) {
-          setUploading(false);
-          setUpdated(true);
-        }
-      },
-      schema,
-      mode: true,
-    });
+      if (newProduct) {
+        setUploading(false);
+        setUpdated(true);
+      }
+    },
+    schema,
+    mode: true,
+  });
 
   if (loading || !adminUser || !categories || !product || uploading)
     return <Spinner />;

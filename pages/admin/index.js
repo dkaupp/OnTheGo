@@ -19,26 +19,26 @@ const Admin = () => {
   const router = useRouter();
   const { user, loadin: loadingUser } = useContext(AuthContext);
 
-  const getOrders = async () => {
-    const response = await getAllOrdersApi();
-
-    if (response.error) {
-      return setOrdersError(response.error);
-    }
-
-    setOrders(response);
-  };
-
   useEffect(() => {
     if (!user && !loadingUser) {
       return router.replace("/");
     }
 
     if (!user.isAdmin) return router.replace("/");
+    const getOrders = async () => {
+      const response = await getAllOrdersApi();
+
+      if (response.error) {
+        return setOrdersError(response.error);
+      }
+
+      setOrders(response);
+    };
+
     getOrders();
     setLoadingOrders(false);
     setLoading(false);
-  }, []);
+  }, [loadingUser, router, user, setOrdersError]);
 
   if (loading) return <Spinner />;
 
@@ -54,7 +54,7 @@ const Admin = () => {
       <div className="row justify-content-md-center">
         <div className="col col-xs-12">
           <AdminNavigation page="orders" />
-          <h2 className="text-center mb-4 mt-2">Customers Order's</h2>
+          <h2 className="text-center mb-4 mt-2">Customers Orders</h2>
           <table className="table" style={{ marginLeft: 20 }}>
             <thead>
               <tr>
@@ -69,7 +69,7 @@ const Admin = () => {
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <Link href={`/admin/edit-order/${order._id}`}>
+                  <Link href={`/admin/edit-order/${order._id}`} passHref>
                     <td className={styles.tableLink}>{order._id}</td>
                   </Link>
                   <td className={styles.spanFinal}>
