@@ -13,6 +13,7 @@ const AdminProducts = () => {
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [awaitingDeletion, setAwaitingDeletion] = useState(false);
 
   const router = useRouter();
   const { user, loading: loadingUser } = useContext(AuthContext);
@@ -37,16 +38,17 @@ const AdminProducts = () => {
   }, [loadingUser, router, user]);
 
   const handleDelete = async (id) => {
+    setAwaitingDeletion(true);
     const deletedProduct = await deleteProductApi(id);
 
     if (deletedProduct.error) {
-      setError(deletedProduct.error.error);
+      return setError(deletedProduct.error.error);
     }
-
     getProducts();
+    setAwaitingDeletion(false);
   };
 
-  if (loading || !products) return <Spinner />;
+  if (loading || !products || awaitingDeletion) return <Spinner />;
 
   return (
     <div className="container mt-4">

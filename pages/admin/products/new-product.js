@@ -11,6 +11,7 @@ const schema = {
   name: Joi.string().min(5).max(30).required().label("Name"),
   price: Joi.number().required().label("Price"),
   stock: Joi.number().required().label("Stock"),
+  description: Joi.string().min(10).max(255).required().label("Comment"),
 };
 
 const NewProduct = () => {
@@ -20,7 +21,7 @@ const NewProduct = () => {
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState("Choose File");
   const [categoryId, setCategoryId] = useState("");
-  const [description, setDescription] = useState("");
+  const [categoryIdError, setCategoryIdError] = useState(null);
 
   const { user: adminUser, loading: loadingAdminUser } =
     useContext(AuthContext);
@@ -48,24 +49,27 @@ const NewProduct = () => {
       name: "",
       price: "",
       stock: "",
+      description: "",
     },
     async onSubmit(data) {
+      if (!categoryId.length)
+        return setCategoryIdError("A category must be selected.");
       const formData = new FormData();
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
-      formData.append("description", description);
       formData.append("categoryId", categoryId);
       setUploading(true);
       formData.append("image", selectedFile);
       const newProduct = await createProductApi(formData);
 
       if (newProduct.error) {
+        console.log(newProduct.error);
         setUploading(false);
         return setError(newProduct.error.error);
       }
 
       if (newProduct) {
         setUploading(false);
-        router.push("/");
+        router.push("/admin/products");
       }
     },
     schema,
@@ -73,7 +77,7 @@ const NewProduct = () => {
 
   if (loading || !adminUser || !categories || uploading) return <Spinner />;
 
-  const { name, stock, price } = data;
+  const { name, stock, price, description } = data;
 
   return (
     <div className="container mt-4">
@@ -121,6 +125,7 @@ const NewProduct = () => {
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
               >
+                <option>Select Category</option>
                 {categories.map((c) => (
                   <option key={c._id} value={c._id}>
                     {c.name}
@@ -128,8 +133,8 @@ const NewProduct = () => {
                 ))}
               </select>
               <div id="categoryHelp" className="form-text">
-                {errors && errors.categoryId
-                  ? errors.categoryId
+                {categoryIdError
+                  ? categoryIdError
                   : categoryId !== ""
                   ? "Ok"
                   : "Please enter a category"}
@@ -187,7 +192,8 @@ const NewProduct = () => {
                   placeholder="Leave a comment here"
                   id="description"
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  name="description"
+                  onChange={handleChange}
                 ></textarea>
                 <div id="descriptionHelp" className="form-text">
                   {errors && errors.description

@@ -13,6 +13,7 @@ const schema = {
   name: Joi.string().min(5).max(30).required().label("Name"),
   price: Joi.number().required().label("Price"),
   stock: Joi.number().required().label("Stock"),
+  description: Joi.string().min(10).max(255).required().label("Description"),
 };
 
 const EditProduct = ({ id }) => {
@@ -24,11 +25,11 @@ const EditProduct = ({ id }) => {
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState("Choose File");
   const [categoryId, setCategoryId] = useState("");
-  const [description, setDescription] = useState("");
   const [initialData, setInitialData] = useState({
     name: "",
     price: "",
     stock: "",
+    description: "",
   });
 
   const { user: adminUser, loading: loadingAdminUser } =
@@ -50,10 +51,10 @@ const EditProduct = ({ id }) => {
         name: response.name,
         stock: response.stock,
         price: response.price,
+        description: response.description,
       });
 
       setCategoryId(response.category._id);
-      setDescription(response.description);
     };
 
     const getCategories = async () => {
@@ -74,7 +75,6 @@ const EditProduct = ({ id }) => {
     async onSubmit(data) {
       const formData = new FormData();
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
-      formData.append("description", description);
       formData.append("categoryId", categoryId);
       let newProduct;
 
@@ -104,7 +104,7 @@ const EditProduct = ({ id }) => {
   if (loading || !adminUser || !categories || !product || uploading)
     return <Spinner />;
 
-  const { name, stock, price } = data;
+  const { name, stock, price, description } = data;
 
   return (
     <div className="container mt-4">
@@ -218,7 +218,8 @@ const EditProduct = ({ id }) => {
                   placeholder="Leave a comment here"
                   id="description"
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  name="description"
+                  onChange={handleChange}
                 ></textarea>
                 <div id="descriptionHelp" className="form-text">
                   {errors && errors.description
