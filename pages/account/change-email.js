@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import updateApi from "../../api/updateApi";
+import updateApi from "../../services/updateApi";
 import Joi from "joi-browser";
 import AuthContext from "../../context/auth-context";
 import Spinner from "../../components/reusable/Spinner";

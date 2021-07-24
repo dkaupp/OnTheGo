@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import getAllProductsApi from "../../../api/getAllProductsApi";
+import getAllProductsApi from "../../../services/getAllProductsApi";
 import AuthContext from "../../../context/auth-context";
 import { useRouter } from "next/router";
 import Spinner from "../../../components/reusable/Spinner";
@@ -7,7 +7,7 @@ import AdminNavigation from "../../../components/reusable/AdminNavigation";
 import Link from "next/link";
 import styles from "../../../styles/Account.module.css";
 import TrashIcon from "../../../components/icons/TrashIcon";
-import deleteProductApi from "../../../api/deleteProductApi";
+import deleteProductApi from "../../../services/deleteProductApi";
 
 const AdminProducts = () => {
   const [products, setProducts] = useState(null);

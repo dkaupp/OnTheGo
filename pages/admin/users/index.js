@@ -6,8 +6,8 @@ import Link from "next/link";
 import styles from "../../../styles/Account.module.css";
 import TrashIcon from "../../../components/icons/TrashIcon";
 import { useRouter } from "next/router";
-import getAllUsersApi from "../../../api/getAllUsersApi";
-import deleteUserApi from "../../../api/deleteUserApi";
+import getAllUsersApi from "../../../services/getAllUsersApi";
+import deleteUserApi from "../../../services/deleteUserApi";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);

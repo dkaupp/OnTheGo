@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import ProductsContext from "../context/products-context";
 import CardItem from "../components/reusable/CardItem";
-import http from "../api/http";
+import http from "../services/http";
 import Spinner from "../components/reusable/Spinner";
 
 export default function Home({ data }) {

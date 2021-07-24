@@ -2,11 +2,11 @@ import { useEffect, useState, useContext } from "react";
 import AuthContext from "../../context/auth-context";
 import AdminNavigation from "../../components/reusable/AdminNavigation";
 import Spinner from "../../components/reusable/Spinner";
-import getAllOrdersApi from "../../api/getAllOrders";
+import getAllOrdersApi from "../../services/getAllOrders";
 import Link from "next/link";
 import styles from "../../styles/Account.module.css";
 import TrashIcon from "../../components/icons/TrashIcon";
-import deleteOrder from "../../api/deleteOrderApi";
+import deleteOrder from "../../services/deleteOrderApi";
 import { useRouter } from "next/router";
 
 const Admin = () => {

@@ -4,7 +4,7 @@ import AuthContext from "../../../context/auth-context";
 import Spinner from "../../../components/reusable/Spinner";
 import Joi from "joi-browser";
 import useForm from "../../../hooks/useForm";
-import createCategoryApi from "../../../api/createCategoryApi";
+import createCategoryApi from "../../../services/createCategoryApi";
 
 const schema = {
   name: Joi.string().min(5).max(30).required().label("Name"),

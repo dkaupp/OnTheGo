@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import http from "../../api/http";
+import http from "../../services/http";
 import Rating from "../../components/reusable/Rating";
 import QuantyIcon from "../../components/icons/QuantityIcons";
 import styles from "../../styles/Product.module.css";
@@ -112,15 +112,6 @@ function Product({
 }
 
 export default Product;
-
-// export async function getStaticPaths() {
-//   const { data: products } = await http.get("/items");
-//   const paths = products.map((product) => ({ params: { id: product._id } }));
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// }
 
 export async function getServerSideProps({ params: { id } }) {
   const { data: product } = await http.get(`items/${id}`);

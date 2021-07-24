@@ -1,11 +1,11 @@
 import { useEffect, useState, useContext } from "react";
-import getUserApi from "../../../api/getUserApi";
+import getUserApi from "../../../services/getUserApi";
 import { useRouter } from "next/router";
 import AuthContext from "../../../context/auth-context";
 import Spinner from "../../../components/reusable/Spinner";
 import useFormShipping from "../../../hooks/userFormShipping";
 import Joi from "joi-browser";
-import editUserApi from "../../../api/editUserApi";
+import editUserApi from "../../../services/editUserApi";
 
 const schema = {
   name: Joi.string().min(5).max(30).required().label("Name"),

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import getCustomer from "../api/getCutomer";
+import getCustomer from "../services/getCutomer";
 
 const CustomerContext = createContext();
 

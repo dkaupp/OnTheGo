@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import OrderContext from "../../context/order-context";
-import getOrderApi from "../../api/getOrderApi";
+import getOrderApi from "../../services/getOrderApi";
 import Spinner from "../../components/reusable/Spinner";
 import TotalOrderTable from "../../components/reusable/TotalOrderTable";
 import OrderListItem from "../../components/reusable/OrderListItem";
@@ -9,8 +9,7 @@ import PaymentMethod from "../../components/reusable/PaymenMethod";
 import PaymentStatus from "../../components/reusable/PaymentStatus";
 import DeliveryStatus from "../../components/reusable/DeliveryStatus";
 import { PayPalButton } from "react-paypal-button-v2";
-import http from "../../api/http";
-import router from "next/router";
+import http from "../../services/http";
 import Head from "next/head";
 
 const OrderPage = ({ id }) => {

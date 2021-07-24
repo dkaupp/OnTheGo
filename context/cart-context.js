@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import http from "../api/http";
+import http from "../services/http";
 import jwtDecode from "jwt-decode";
 
 const CartContext = createContext(null);

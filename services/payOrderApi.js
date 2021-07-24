@@ -1,5 +1,5 @@
 import authStorage from "../auth/storage";
-import http from "../api/http";
+import http from "./http";
 
 const payorderApi = async (id, paymentResult) => {
   const authToken = authStorage.getAuthToken();

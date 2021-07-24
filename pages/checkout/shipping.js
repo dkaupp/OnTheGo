@@ -2,10 +2,10 @@ import { useEffect, useContext, useState } from "react";
 import Joi from "joi-browser";
 import useFormShipping from "../../hooks/userFormShipping";
 import AuthContext from "../../context/auth-context";
-import shippingApi from "../../api/shippingApi";
+import shippingApi from "../../services/shippingApi";
 import Checkout from "../../components/reusable/Checkout";
 import router from "next/router";
-import customerApi from "../../api/customerApi";
+import customerApi from "../../services/customerApi";
 import CustomerContext from "../../context/customer-context";
 import Head from "next/head";
 

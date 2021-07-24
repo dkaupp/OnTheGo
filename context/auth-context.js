@@ -1,8 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import authStorage from "../auth/storage";
 import jwtDecode from "jwt-decode";
-import singInApi from "../api/siningApi";
-import http from "../api/http";
+import singInApi from "../services/siningApi";
 
 const AuthContext = createContext();
 

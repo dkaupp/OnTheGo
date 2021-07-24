@@ -4,10 +4,10 @@ import AuthContext from "../../../context/auth-context";
 import Spinner from "../../../components/reusable/Spinner";
 import useFormShipping from "../../../hooks/userFormShipping";
 import Joi from "joi-browser";
-import getProductApi from "../../../api/getProductApi";
-import getCategoriesApi from "../../../api/getCategoriesApi";
-import updateProductApi from "../../../api/updateProductApi";
-import updateProductNoImageApi from "../../../api/updateProductNoImageApi";
+import getProductApi from "../../../services/getProductApi";
+import getCategoriesApi from "../../../services/getCategoriesApi";
+import updateProductApi from "../../../services/updateProductApi";
+import updateProductNoImageApi from "../../../services/updateProductNoImageApi";
 
 const schema = {
   name: Joi.string().min(5).max(30).required().label("Name"),

@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import http from "../api/http";
+import http from "../services/http";
 
 const token = "authToken";
 

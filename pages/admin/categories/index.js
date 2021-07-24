@@ -2,12 +2,12 @@ import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../../../context/auth-context";
 import Spinner from "../../../components/reusable/Spinner";
-import getCategoriesApi from "../../../api/getCategoriesApi";
+import getCategoriesApi from "../../../services/getCategoriesApi";
 import AdminNavigation from "../../../components/reusable/AdminNavigation";
 import Link from "next/link";
 import styles from "../../../styles/Account.module.css";
 import TrashIcon from "../../../components/icons/TrashIcon";
-import deleteCategoryApi from "../../../api/deleteCategoryApi";
+import deleteCategoryApi from "../../../services/deleteCategoryApi";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState(null);
@@ -72,6 +72,7 @@ const AdminCategories = () => {
                     <div
                       onClick={() => handleDelete(c._id)}
                       className="d-flex justify-content-end"
+                      style={{ cursor: "pointer" }}
                     >
                       <TrashIcon width="22" height="21" color="red" />
                     </div>

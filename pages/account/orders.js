@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/auth-context";
 import CustomerContext from "../../context/customer-context";
 import Spinner from "../../components/reusable/Spinner";
-import getOrdersApi from "../../api/getOrdersApi";
+import getOrdersApi from "../../services/getOrdersApi";
 import Link from "next/link";
 import styles from "../../styles/Account.module.css";
 import AccountNavigation from "../../components/reusable/AccountNavidation";

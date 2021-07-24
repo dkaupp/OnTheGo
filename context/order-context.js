@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import orderApi from "../api/orderApi";
-import payorderApi from "../api/payOrderApi";
+import orderApi from "../services/orderApi";
+import payorderApi from "../services/payOrderApi";
 
 const tokenKey = "orderToken";
 

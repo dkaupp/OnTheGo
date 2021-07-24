@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from "react";
-import getOrderApi from "../../../api/getOrderApi";
+import getOrderApi from "../../../services/getOrderApi";
 import Spinner from "../../../components/reusable/Spinner";
 import TotalOrderTable from "../../../components/reusable/TotalOrderTable";
 import OrderListItem from "../../../components/reusable/OrderListItem";
@@ -9,7 +9,7 @@ import PaymentStatus from "../../../components/reusable/PaymentStatus";
 import DeliveryStatus from "../../../components/reusable/DeliveryStatus";
 import AuthContext from "../../../context/auth-context";
 import { useRouter } from "next/router";
-import setOrderStatus from "../../../api/setOrderStatus";
+import setOrderStatus from "../../../services/setOrderStatus";
 import Link from "next/link";
 
 const EditOrder = ({ id }) => {
