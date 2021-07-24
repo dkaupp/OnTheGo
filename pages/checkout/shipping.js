@@ -20,7 +20,7 @@ const schema = {
 const Shipping = () => {
   const { user, loading } = useContext(AuthContext);
   const { storeCustomerData } = useContext(CustomerContext);
-  const { error, setError } = useState(null);
+  const [error, setError] = useState(null);
   const [initialData, setInitialData] = useState({
     name: "",
     address: "",
@@ -33,28 +33,24 @@ const Shipping = () => {
     if (!user && loading === false) window.location.href = "/";
 
     const fillCustomerShipping = async () => {
-      try {
-        const response = await customerApi();
+      const response = await customerApi();
 
-        if (response.error) {
-          return setError(response.error);
-        }
-
-        const {
-          name,
-          shippingAddress: { address, city, postalCode, country },
-        } = response;
-
-        setInitialData({
-          name,
-          address,
-          city,
-          postalCode,
-          country,
-        });
-      } catch (error) {
-        setError(error);
+      if (response.error) {
+        return setError(response.error.error);
       }
+
+      const {
+        name,
+        shippingAddress: { address, city, postalCode, country },
+      } = response;
+
+      setInitialData({
+        name,
+        address,
+        city,
+        postalCode,
+        country,
+      });
     };
 
     fillCustomerShipping();
@@ -198,6 +194,11 @@ const Shipping = () => {
                 NEXT PAYMENT
               </button>
             </form>
+            {error && (
+              <div className="success mt-3 bg-danger text-white p-2">
+                {error.toUpperCase()}
+              </div>
+            )}
           </div>
         </div>
       </div>

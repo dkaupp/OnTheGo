@@ -19,6 +19,7 @@ const OrderPage = ({ id }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState(null);
   const { payOrder } = useContext(OrderContext);
 
   const paypalScript = async () => {
@@ -62,8 +63,8 @@ const OrderPage = ({ id }) => {
       return setError({
         message: "There was and error while paying the order.",
       });
+    setPaymentStatus("Paid");
     setPaymentSuccess(true);
-    router.reload();
   };
 
   if (loading || !order) return <Spinner />;
@@ -95,7 +96,9 @@ const OrderPage = ({ id }) => {
             />
             <PaymentMethod paymentMethod={order.paymentMethod} />
             <hr />
-            <PaymentStatus isPaid={order.isPaid} />
+            <PaymentStatus
+              isPaid={paymentStatus ? paymentStatus : order.isPaid}
+            />
             <hr />
             <ShippingAddress shippingAddress={order.shippingAddress} />
             <hr />
@@ -109,14 +112,16 @@ const OrderPage = ({ id }) => {
                 {error.toUpperCase()}
               </div>
             )}
-            <div className="d-flex justify-content-end">
-              {!order.isPaid && scriptLoaded && (
-                <PayPalButton
-                  amount={order.orderTotal}
-                  onSuccess={handleSuccess}
-                />
-              )}
-            </div>
+            {!paymentSuccess && (
+              <div className="d-flex justify-content-end">
+                {!order.isPaid && scriptLoaded && (
+                  <PayPalButton
+                    amount={order.orderTotal}
+                    onSuccess={handleSuccess}
+                  />
+                )}
+              </div>
+            )}
             {paymentSuccess && (
               <div className="success mt-3 bg-success text-white p-2">
                 ORDER WAS PAID SUCCESSFULLY. THANKS !
