@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import http from "../../api/http";
+import { useState, useContext } from "react";
+import http from "../../services/http";
 import SearchContext from "../../context/search-context";
 import ListProduct from "../../components/reusable/ListProduct";
 

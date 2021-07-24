@@ -4,7 +4,7 @@ import useForm from "../../../hooks/useForm";
 import { useRouter } from "next/router";
 import Joi from "joi-browser";
 import Spinner from "../../../components/reusable/Spinner";
-import addProductReviewApi from "../../../api/addProductReviewApi";
+import addProductReviewApi from "../../../services/addProductReviewApi";
 
 const schema = {
   comment: Joi.string().min(5).max(30).required().label("Comment"),
