@@ -129,7 +129,7 @@ const Register = () => {
                 Confirm Password
               </label>
               <input
-                type="repassword"
+                type="password"
                 className="form-control"
                 id="repassword"
                 name="repassword"
