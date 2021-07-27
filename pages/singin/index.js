@@ -100,7 +100,7 @@ const SingIn = () => {
                 className="btn btn-dark"
                 onClick={handleSubmit}
               >
-                SING IN
+                SIGN IN
               </button>
             </form>
             <div className="mt-3">
