@@ -85,7 +85,7 @@ function Header() {
                       />
                     </svg>
                   }
-                  text={user ? "Account " : "Sing In"}
+                  text={user ? "Account " : "Sign In"}
                   link={user ? "/account/orders" : "/singin"}
                 />
               </li>
